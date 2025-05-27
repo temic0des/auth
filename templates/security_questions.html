@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Security Questions{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-8 mt-8">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Security Questions</h2>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="mb-4 p-4 rounded {% if category == 'success' %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('security_questions') }}">
+        {{ form.csrf_token }}
+        
+        <!-- First Question -->
+        <div class="mb-6">
+            {{ form.question1.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+            {{ form.question1(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Enter your first security question") }}
+            {% if form.question1.errors %}
+                {% for error in form.question1.errors %}
+                    <p class="text-red-500 text-xs italic">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            
+            {{ form.answer1.label(class="block text-gray-700 text-sm font-bold mb-2 mt-4") }}
+            {{ form.answer1(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Enter your answer") }}
+            {% if form.answer1.errors %}
+                {% for error in form.answer1.errors %}
+                    <p class="text-red-500 text-xs italic">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Second Question -->
+        <div class="mb-6">
+            {{ form.question2.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+            {{ form.question2(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Enter your second security question") }}
+            {% if form.question2.errors %}
+                {% for error in form.question2.errors %}
+                    <p class="text-red-500 text-xs italic">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            
+            {{ form.answer2.label(class="block text-gray-700 text-sm font-bold mb-2 mt-4") }}
+            {{ form.answer2(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Enter your answer") }}
+            {% if form.answer2.errors %}
+                {% for error in form.answer2.errors %}
+                    <p class="text-red-500 text-xs italic">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Third Question -->
+        <div class="mb-6">
+            {{ form.question3.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+            {{ form.question3(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Enter your third security question") }}
+            {% if form.question3.errors %}
+                {% for error in form.question3.errors %}
+                    <p class="text-red-500 text-xs italic">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            
+            {{ form.answer3.label(class="block text-gray-700 text-sm font-bold mb-2 mt-4") }}
+            {{ form.answer3(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Enter your answer") }}
+            {% if form.answer3.errors %}
+                {% for error in form.answer3.errors %}
+                    <p class="text-red-500 text-xs italic">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="flex items-center justify-between">
+            {{ form.submit(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
